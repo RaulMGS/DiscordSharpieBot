@@ -15,15 +15,17 @@ namespace DiscordSharpBot {
         public SharpBot() {
             // Register commands
             botActions = new Dictionary<string, Action<SocketMessage>>();
-            Economy.Instance.RegisterTo(botActions, botClient);
-            Music.Instance.RegisterTo(botActions, botClient);
-
+             
             // It is recommended to Dispose of a client when you are finished
             // using it, at the end of your app's lifetime.
             botClient = new DiscordSocketClient();
             botClient.Log += LogAsync;
             botClient.Ready += ReadyAsync;
             botClient.MessageReceived += MessageReceivedAsync;
+
+            Economy.Instance.RegisterTo(botActions, botClient);
+            Music.Instance.RegisterTo(botActions, botClient);
+
         }
 
         public async Task MainAsync(string botId) {
