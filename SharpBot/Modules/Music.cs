@@ -63,7 +63,7 @@ namespace DiscordSharpBot {
             if (!musicUsers.ContainsKey(user)) musicUsers.Add(user, after.VoiceChannel);
             else musicUsers[user] = after.VoiceChannel;
 
-            if (musicUsers.Any(x => x.Value != lavalinkCurrentChannel) && lavalinkGuildId > 0) {
+            if (!musicUsers.Any(x => x.Value == lavalinkCurrentChannel) && lavalinkGuildId > 0) {
                 lavalinkManager.LeaveAsync(lavalinkGuildId);
             }
             return Task.CompletedTask;
